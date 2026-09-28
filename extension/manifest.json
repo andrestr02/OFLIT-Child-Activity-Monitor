@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "OFLIT Child Activity Monitor",
+  "version": "0.1.0",
+  "description": "Records only SUBMITTED Google searches and ChatGPT prompts on OFLIT child devices, for parent/admin activity reports. Not a keylogger; never captures passwords, drafts, tokens, or cookies.",
+  "minimum_chrome_version": "120",
+  "background": { "service_worker": "background.js" },
+  "host_permissions": [
+    "http://127.0.0.1:8791/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/search*"],
+      "js": ["common/redact.js", "common/client.js", "adapters/google.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["common/redact.js", "common/client.js", "adapters/chatgpt.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "storage": { "managed_schema": "managed_schema.json" }
+}

@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""Entry point for the OFLIT Child Activity Monitor agent daemon."""
+import os
+import sys
+
+# Make the package importable whether installed to /opt or run from a checkout.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+
+from oflit_activity.config import load_config
+from oflit_activity.daemon import Agent
+
+
+def _logger(msg):
+    # Journald captures stdout/stderr for the systemd unit.
+    print(msg, flush=True)
+
+
+def main():
+    config = load_config(os.environ.get("OFLIT_ACTIVITY_CONFIG") or None)
+    if not config.monitored_users:
+        _logger("no MONITORED_USERS configured; agent idle (fail-open)")
+    agent = Agent(config, logger=_logger)
+    agent.run()
+
+
+if __name__ == "__main__":
+    main()

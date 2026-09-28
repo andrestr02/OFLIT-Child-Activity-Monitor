@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "endpoint": {
+      "title": "Local agent ingestion endpoint (loopback only)",
+      "type": "string"
+    },
+    "token": {
+      "title": "Shared ingest marker (not a secret; filters stray localhost noise)",
+      "type": "string"
+    },
+    "maxChars": {
+      "title": "Maximum captured content length before truncation",
+      "type": "integer"
+    }
+  }
+}

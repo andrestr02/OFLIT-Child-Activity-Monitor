@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Runtime / secrets — NEVER commit
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+telegram.env
+*.env
+agent.conf
+!deploy/config/agent.conf.example
+!deploy/config/telegram.env.example
+
+# Local runtime / outbox / logs
+/var/
+outbox/
+*.log
+.local-run/
+
+# Test scratch
+.pytest_cache/
+tests/.scratch/

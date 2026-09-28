@@ -1,0 +1,18 @@
+{
+  "_comment": "Chrome managed-extension policy for the OFLIT Child Activity Monitor extension. Install per Chrome managed-policy conventions (e.g. /etc/opt/chrome/policies/managed/). Replace __EXTENSION_ID__ and __INGEST_TOKEN__. The extension is force-installed and its 3rd-party settings limited to the two supported sites; it needs no broad permissions.",
+  "ExtensionSettings": {
+    "__EXTENSION_ID__": {
+      "installation_mode": "force_installed",
+      "toolbar_pin": "force_pinned"
+    }
+  },
+  "3rdparty": {
+    "extensions": {
+      "__EXTENSION_ID__": {
+        "endpoint": "http://127.0.0.1:8791/event",
+        "token": "__INGEST_TOKEN__",
+        "maxChars": 500
+      }
+    }
+  }
+}

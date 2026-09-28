@@ -1,0 +1,43 @@
+# OFLIT Child Activity Monitor — agent configuration.
+# key=value. Installed to /etc/oflit-activity/agent.conf (root:root 0640).
+# NO SECRETS HERE. The Telegram token is read at send time from the existing
+# /etc/ofl-ai-lab/telegram.env and is never copied into this file.
+
+# Child usernames to monitor (space or comma separated). Only these are ever
+# tracked; everything else (system/service/SSH sessions) is ignored.
+MONITORED_USERS=azzahra hudzaifah ibrohim
+
+DEVICE=oflitlab-i3
+OBSERVER=oflitlab-i3
+TIMEZONE=Asia/Jakarta
+
+# Loopback-only ingestion. Never set LISTEN_HOST to anything non-loopback.
+LISTEN_HOST=127.0.0.1
+LISTEN_PORT=8791
+
+# Cheap shared marker echoed by the managed extension. NOT a secret (the child
+# owns the browser); it only filters stray localhost noise. Set the same value
+# in the Chrome managed policy.
+INGEST_TOKEN=
+
+# Content limits (hard ceiling 2000 chars regardless of this value).
+MAX_CONTENT_CHARS=500
+MAX_PAYLOAD_BYTES=16384
+
+# Retention (days) for stored events. Conservative default.
+RETENTION_DAYS=14
+
+# Network observation via Squid access log. Coarse, device-level, honestly
+# labeled as "network observation". Off by default.
+SQUID_ENABLED=false
+SQUID_ACCESS_LOG=/var/log/squid/access.log
+
+# Telegram delivery over the EXISTING OFL IT Lab Monitoring transport.
+TELEGRAM_ENABLED=true
+TELEGRAM_ENV_PATH=/etc/ofl-ai-lab/telegram.env
+TELEGRAM_MAX_RETRIES=8
+
+# Seconds a child session must be gone before it is considered ended.
+SESSION_END_GRACE_SECONDS=20
+
+STATE_DIR=/var/lib/oflit-activity
